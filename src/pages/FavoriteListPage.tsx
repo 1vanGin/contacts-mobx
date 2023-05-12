@@ -9,13 +9,9 @@ import { observer } from "mobx-react-lite";
 export const FavoriteListPage = observer(() => {
   const allContacts = contactsStore.contacts;
   const allFavorites = favoriteStore.favorite;
-  const [contacts, setContacts] = useState<ContactDto[]>([]);
-
-  useEffect(() => {
-    setContacts(() =>
-      allContacts.filter(({ id }) => allFavorites.includes(id))
-    );
-  }, [allContacts, allFavorites]);
+  const contacts: ContactDto[] = allContacts.filter(({ id }) =>
+    allFavorites.includes(id)
+  );
 
   if (contacts.length === 0) {
     return <h3>No favorites</h3>;
